@@ -1,0 +1,19 @@
+diff -uNr connect-1.1.1-orig/Makefile connect-1.1.1/Makefile
+--- connect-1.1.1-orig/Makefile	1970-01-01 00:00:00.000000000 +0000
++++ connect-1.1.1/Makefile	2010-09-13 12:07:09.000000000 +0000
+@@ -0,0 +1,15 @@
++#CC=gcc
++CFLAGS=-lresolv
++#INSTALL=install
++
++all: connect
++
++clean:
++	rm -if connect	
++
++connect: connect.c
++	$(CC) connect.c -o connect -DBIND_8_COMPAT=1 $(CFLAGS)
++
++install: connect
++	mkdir -p $(DESTDIR)/usr/bin
++	install -m 0775 connect $(DESTDIR)/usr/bin
